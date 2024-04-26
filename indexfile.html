@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLT Software By BK Murumbe</title>
+</head>
+<body>
+    <style>body {
+        font-family: Arial, sans-serif;
+      }
+      
+      .container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+      }
+      
+      h1,p {
+        text-align: center;
+      }
+      
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      
+      input[type="text"], input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      
+      button {
+        padding: 10px 20px;
+        margin-right: 10px;
+        border: none;
+        border-radius: 4px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+      }
+      
+      button:hover {
+        background-color: #0056b3;
+      }
+      
+      button:active {
+        background-color: #004080;
+      }
+      </style>
+<div id="mySection">
+<h1>CLT Software By <a href="https://www.instagram.com/bk.murumbe/">BK Murumbe</a></h1>
+<p>You and your msg needs privacy, Talk in alien language, try now</p>
+<div>
+  <label for="keyInput">Key (Encryption Method):</label>
+  <input type="password" id="keyInput" placeholder="Enter key" onchange="changeKey()">
+</div>
+<br>
+<div>
+  <label for="englishInput">Normal English:</label>
+  <input type="text" id="englishInput" oninput="encodeText()">
+  <button onclick="clearInput('englishInput')">Clear</button>
+  <button onclick="copyText('englishInput')">Copy</button>
+  <button onclick="pasteText('englishInput')">Paste</button>
+</div>
+<br>
+<div>
+  <label for="codedInput">Coded Language:</label>
+  <input type="text" id="codedInput" oninput="decodeText()">
+  <button onclick="clearInput('codedInput')">Clear</button>
+  <button onclick="copyText('codedInput')">Copy</button>
+  <button onclick="pasteText('codedInput')">Paste</button>
+</div>
+</div>
+<script>
+const allowedDomain = "cltsoft.netlify.com";
+const currentDomain = window.location.hostname;
+/*bkmurumbe codebase, Dont copy you ediots*/
+if (currentDomain !== allowedDomain) {
+    
+    document.getElementById("mySection").style.display = "none";
+    alert("Copying others code is bad habit, don't be like vaibhav who always copy others code:) . Sorry bro.");
+}
+
+const letterMaps = {
+  'general': {
+    'a': '!',
+    'b': '@',
+    'c': '#',
+    'd': '$',
+    'e': '%',
+    'f': '^',
+    'g': '&',
+    'h': '*',
+    'i': '(',
+    'j': ')',
+    'k': '_',
+    'l': '+',
+    'm': '-',
+    'n': '=',
+    'o': '[',
+    'p': ']',
+    'q': '{',
+    'r': '}',
+    's': '|',
+    't': ':',
+    'u': ';',
+    'v': '/',
+    'w': '<',
+    'x': '>',
+    'y': '?',
+    'z': '~'
+  },
+  'private1': {
+    'a': 'z',
+    'b': 'x',
+    'c': 'v',
+    'd': 't',
+    'e': 'r',
+    'f': 'p',
+    'g': 'n',
+    'h': 'l',
+    'i': 'j',
+    'j': 'h',
+    'k': 'f',
+    'l': 'd',
+    'm': 's',
+    'n': 'a',
+    'o': 'q',
+    'p': 'w',
+    'q': 'e',
+    'r': 'y',
+    's': 'u',
+    't': 'i',
+    'u': 'o',
+    'v': 'k',
+    'w': 'm',
+    'x': 'g',
+    'y': 'c',
+    'z': 'b'
+  },
+  'private2': {
+    'a': 'm',
+    'b': 'o',
+    'c': 'q',
+    'd': 's',
+    'e': 'u',
+    'f': 'w',
+    'g': 'y',
+    'h': 'a',
+    'i': 'c',
+    'j': 'e',
+    'k': 'g',
+    'l': 'i',
+    'm': 'k',
+    'n': 'b',
+    'o': 'd',
+    'p': 'f',
+    'q': 'h',
+    'r': 'j',
+    's': 'l',
+    't': 'n',
+    'u': 'p',
+    'v': 'r',
+    'w': 't',
+    'x': 'v',
+    'y': 'x',
+    'z': 'z'
+  }
+};
+
+// Function to get the entered key
+function getKey() {
+  return document.getElementById('keyInput').value.toLowerCase();
+}
+
+// Function to encode normal English text to coded language
+// Function to encode normal English text to coded language
+function encodeText() {
+  const englishInput = document.getElementById('englishInput').value.toLowerCase();
+  const key = getKey();
+  const letterMap = letterMaps[key];
+  
+  // Check if letterMap is defined
+  if (letterMap) {
+    let codedText = '';
+    for (let i = 0; i < englishInput.length; i++) {
+      const char = englishInput[i];
+      if (char in letterMap) {
+        codedText += letterMap[char];
+      } else {
+        codedText += char;
+      }
+    }
+  
+    document.getElementById('codedInput').value = codedText;
+  } else {
+    // Handle case where letterMap is undefined
+    console.error('Letter map for the selected key is not defined.');
+  }
+}
+
+
+// Function to decode coded language to normal English text
+// Function to decode coded language to normal English text
+function decodeText() {
+  const codedInput = document.getElementById('codedInput').value.toLowerCase();
+  const key = getKey();
+  const letterMap = letterMaps[key];
+  
+  if (letterMap) {
+    let englishText = '';
+    for (let i = 0; i < codedInput.length; i++) {
+      const char = codedInput[i];
+      let found = false;
+      for (const [key, value] of Object.entries(letterMap)) {
+        if (value === char) {
+          englishText += key;
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        englishText += char;
+      }
+    }
+    document.getElementById('englishInput').value = englishText;
+  } else {
+    console.error('Letter map for the selected key is not defined.');
+  }
+}
+
+
+// Function to clear input field
+function clearInput(inputId) {
+  document.getElementById(inputId).value = '';
+}
+
+// Function to copy text from input field
+function copyText(inputId) {
+  const input = document.getElementById(inputId);
+  input.select();
+  document.execCommand('copy');
+}
+
+// Function to paste text into input field
+async function pasteText(inputId) {
+  const text = await navigator.clipboard.readText();
+  document.getElementById(inputId).value = text;
+  if (inputId === 'codedInput') {
+    decodeText();
+  }
+}
+
+// Function to change the key and re-encode/decode
+function changeKey() {
+  encodeText();
+  decodeText();
+}
+</script>
+
+</body>
+</html>
